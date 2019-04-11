@@ -66,7 +66,7 @@ open class RAMBounceAnimation: RAMItemAnimation {
         textLabel.textColor = textSelectedColor
 
         if let iconImage = icon.image {
-            let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
+            let renderImage = iconImage.withRenderingMode(.alwaysOriginal)
             icon.image = renderImage
             icon.tintColor = iconSelectedColor
         }
