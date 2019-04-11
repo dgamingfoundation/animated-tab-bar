@@ -82,7 +82,7 @@ open class RAMBounceAnimation: RAMItemAnimation {
         icon.layer.add(bounceAnimation, forKey: nil)
 
         if let iconImage = icon.image {
-            let renderImage = iconImage.withRenderingMode(.alwaysTemplate)
+            let renderImage = iconImage.withRenderingMode(.alwaysOriginal)
             icon.image = renderImage
             icon.tintColor = iconSelectedColor
         }
