@@ -81,7 +81,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
     open var badge: RAMBadge? // use badgeValue to show badge
 
     // Container for icon and text in UITableItem.
-    open var iconView: (icon: UIImageView, textLabel: UILabel)?
+    open var iconView: (icon: UIImageView, selectedImage: UIImage, image: UIImage, textLabel: UILabel)?
 
     /**
      Start selected animation
@@ -92,6 +92,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
         guard animation != nil && iconView != nil else {
             return
         }
+        iconView!.icon.image = iconView!.selectedImage
         animation.playAnimation(iconView!.icon, textLabel: iconView!.textLabel)
     }
 
@@ -103,7 +104,8 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
         guard animation != nil && iconView != nil else {
             return
         }
-
+        
+        iconView!.icon.image = iconView!.image
         animation.deselectAnimation(
             iconView!.icon,
             textLabel: iconView!.textLabel,
@@ -118,7 +120,8 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
         guard animation != nil && iconView != nil else {
             return
         }
-
+        
+        iconView!.icon.image = iconView!.selectedImage
         animation.selectedState(iconView!.icon, textLabel: iconView!.textLabel)
     }
     
@@ -130,6 +133,7 @@ open class RAMAnimatedTabBarItem: UITabBarItem {
             return
         }
         
+        iconView!.icon.image = iconView!.image
         animation.deselectedState(iconView!.icon, textLabel: iconView!.textLabel)
     }
 }
@@ -188,10 +192,12 @@ extension RAMAnimatedTabBarController {
 
         let containerFrom = items[from].iconView?.icon.superview
         containerFrom?.backgroundColor = items[from].bgDefaultColor
+        items[from].iconView?.icon.image = items[from].iconView?.image
         items[from].deselectAnimation()
 
         let containerTo = items[to].iconView?.icon.superview
         containerTo?.backgroundColor = items[to].bgSelectedColor
+        items[to].iconView?.icon.image = items[to].iconView?.selectedImage
         items[to].playAnimation()
     }
 }
@@ -323,7 +329,8 @@ open class RAMAnimatedTabBarController: UITabBarController {
             let renderMode = item.iconColor.cgColor.alpha == 0 ? UIImage.RenderingMode.alwaysOriginal :
                 UIImage.RenderingMode.alwaysTemplate
 
-            let iconImage = item.image ?? item.iconView?.icon.image
+            let iconImage = item.image ?? item.iconView?.image
+            let iconSelectedImage = item.selectedImage ?? item.iconView?.selectedImage
             let icon = UIImageView(image: iconImage?.withRenderingMode(renderMode))
             icon.translatesAutoresizingMaskIntoConstraints = false
             icon.tintColor = item.iconColor
@@ -356,7 +363,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
                 icon.alpha = 0.5
                 textLabel.alpha = 0.5
             }
-            item.iconView = (icon: icon, textLabel: textLabel)
+            item.iconView = (icon: icon, selectedImage: iconSelectedImage!, image: iconImage!, textLabel: textLabel)
             
             if 0 == index { // selected first elemet
                 item.selectedState()
@@ -502,7 +509,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
         if items[currentIndex].isEnabled == false { return }
 
-        let controller = children[currentIndex]
+        let controller = childViewControllers[currentIndex]
 
         if let shouldSelect = delegate?.tabBarController?(self, shouldSelect: controller)
             , !shouldSelect {

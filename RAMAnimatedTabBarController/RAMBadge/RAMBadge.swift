@@ -34,7 +34,9 @@ open class RAMBadge: UILabel {
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        layer.backgroundColor = UIColor.red.cgColor
+        layer.backgroundColor = #colorLiteral(red: 0.8980392157, green: 0.01568627451, blue: 0.4039215686, alpha: 1).cgColor
+        layer.borderWidth = 1
+        layer.borderColor = #colorLiteral(red: 0.1647058824, green: 0.1764705882, blue: 0.2196078431, alpha: 1).cgColor
         layer.cornerRadius = frame.size.width / 2
 
         configureNumberLabel()
@@ -108,7 +110,7 @@ open class RAMBadge: UILabel {
                                                toItem: onView,
                                                attribute: .centerX,
                                                multiplier: 1,
-                                               constant: 10)
+                                               constant: 8)
         onView.addConstraint(centerX)
         centerXConstraint = centerX
     }

@@ -121,12 +121,12 @@ open class RAMFrameItemAnimation: RAMItemAnimation {
 
     @nonobjc func playFrameAnimation(_ icon: UIImageView, images: Array<CGImage>) {
         let frameAnimation = CAKeyframeAnimation(keyPath: Constants.AnimationKeys.keyFrame)
-        frameAnimation.calculationMode = CAAnimationCalculationMode.discrete
+        frameAnimation.calculationMode = kCAAnimationDiscrete
         frameAnimation.duration = TimeInterval(duration)
         frameAnimation.values = images
         frameAnimation.repeatCount = 1
         frameAnimation.isRemovedOnCompletion = false
-        frameAnimation.fillMode = CAMediaTimingFillMode.forwards
+        frameAnimation.fillMode = kCAFillModeForwards
         icon.layer.add(frameAnimation, forKey: nil)
     }
 }

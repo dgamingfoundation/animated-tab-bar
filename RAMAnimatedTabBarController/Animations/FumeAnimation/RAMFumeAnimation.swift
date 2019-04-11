@@ -98,12 +98,12 @@ open class RAMFumeAnimation: RAMItemAnimation {
     func playLabelAnimation(_ textLabel: UILabel) {
 
         let yPositionAnimation = createAnimation(Constants.AnimationKeys.positionY, values: [textLabel.center.y as AnyObject, (textLabel.center.y - 60.0) as AnyObject], duration: duration)
-        yPositionAnimation.fillMode = CAMediaTimingFillMode.removed
+        yPositionAnimation.fillMode = kCAFillModeRemoved
         yPositionAnimation.isRemovedOnCompletion = true
         textLabel.layer.add(yPositionAnimation, forKey: nil)
 
         let scaleAnimation = createAnimation(Constants.AnimationKeys.scale, values: [1.0 as AnyObject, 2.0 as AnyObject], duration: duration)
-        scaleAnimation.fillMode = CAMediaTimingFillMode.removed
+        scaleAnimation.fillMode = kCAFillModeRemoved
         scaleAnimation.isRemovedOnCompletion = true
         textLabel.layer.add(scaleAnimation, forKey: nil)
 
@@ -116,8 +116,8 @@ open class RAMFumeAnimation: RAMItemAnimation {
         let animation = CAKeyframeAnimation(keyPath: keyPath)
         animation.values = values
         animation.duration = TimeInterval(duration)
-        animation.calculationMode = CAAnimationCalculationMode.cubic
-        animation.fillMode = CAMediaTimingFillMode.forwards
+        animation.calculationMode = kCAAnimationCubic
+        animation.fillMode = kCAFillModeForwards
         animation.isRemovedOnCompletion = false
         return animation
     }
