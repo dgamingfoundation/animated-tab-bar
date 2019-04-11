@@ -77,7 +77,7 @@ open class RAMBounceAnimation: RAMItemAnimation {
         let bounceAnimation = CAKeyframeAnimation(keyPath: Constants.AnimationKeys.scale)
         bounceAnimation.values = [1.0, 1.4, 0.9, 1.15, 0.95, 1.02, 1.0]
         bounceAnimation.duration = TimeInterval(duration)
-        bounceAnimation.calculationMode = CAAnimationCalculationMode.cubic
+        bounceAnimation.calculationMode = kCAAnimationCubic
 
         icon.layer.add(bounceAnimation, forKey: nil)
 

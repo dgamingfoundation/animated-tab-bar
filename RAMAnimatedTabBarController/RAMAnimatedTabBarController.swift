@@ -509,7 +509,7 @@ open class RAMAnimatedTabBarController: UITabBarController {
 
         if items[currentIndex].isEnabled == false { return }
 
-        let controller = children[currentIndex]
+        let controller = childViewControllers[currentIndex]
 
         if let shouldSelect = delegate?.tabBarController?(self, shouldSelect: controller)
             , !shouldSelect {
